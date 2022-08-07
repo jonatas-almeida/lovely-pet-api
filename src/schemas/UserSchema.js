@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
         required: [true, 'O campo de e-mail é obrigatório']
     },
     user_cpf: {
-        type: Number,
+        type: String,
         required: [true, 'O CPF é obrigatório']
     },
     user_occupation: {
