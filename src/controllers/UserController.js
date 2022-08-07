@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const jwt = require('jsonwebtoken')
 
 const schema = require('../schemas/UserSchema');
-const utilService = require('../utils/util-service');
+const utilService = require('../utils/UtilService');
 
 const User = mongoose.model('user', schema.userSchema);
 

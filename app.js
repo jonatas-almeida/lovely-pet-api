@@ -1,13 +1,15 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const { route } = require('./routes');
 class App {
     constructor() {
         this.server = express();
 
-        this.middlewares();
         this.connectToServer();
+        this.middlewares();
+        this.routes();
     }
 
     middlewares() {
@@ -25,18 +27,14 @@ class App {
     }
 
     connectToServer() {
-        try {
-            mongoose.connect("mongodb://localhost:27017/LovelyPetDB")
+        mongoose.connect("mongodb://localhost:27017/LovelyPetDB")
 
-            this.server.listen(8080, function() {
-                console.log("Server listening on port 8080");
-            });
-        } catch (error) {
-            console.log(error);
-        }
+        this.server.listen(8080, function() {
+            console.log("Server listening on port 8080");
+        });
     }
 
 
 }
 
-module.exports = App;
+module.exports = new App().server;
