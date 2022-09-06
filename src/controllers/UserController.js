@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const schema = require('../schemas/UserSchema');
 const utilService = require('../utils/UtilService');
@@ -133,6 +134,34 @@ module.exports = {
             res.send({
                 message: "Não foi possível fazer o login"
             })
+        }
+    },
+
+    // Deletar usuário
+    async deleteUser(req, res) {
+        const userInfo = await utilService.verifyUserToken(req)
+
+        if(userInfo.status === true) {
+            try {
+                User.deleteOne({ _id: userInfo.user._id }, function(err) {
+                    if(!err) {
+                        res.send({
+                            message: "Usuário excluído com sucesso!"
+                        })
+                    }
+                    else {
+                        res.send({
+                            message: "Não foi possível excluir o usuário",
+                            error: err
+                        })
+                    }
+                });
+            } catch (error) {
+                res.send({
+                    message: "Não foi possível excluir o usuário",
+                    error: error
+                })
+            }
         }
     }
 }
