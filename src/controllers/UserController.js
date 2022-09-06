@@ -143,7 +143,7 @@ module.exports = {
 
         if(userInfo.status === true) {
             try {
-                User.deleteOne({ _id: userInfo.user._id }, function(err) {
+                User.deleteOne({ _id: userInfo.user.id }, function(err, result) {
                     if(!err) {
                         res.send({
                             message: "Usuário excluído com sucesso!"
@@ -162,6 +162,11 @@ module.exports = {
                     error: error
                 })
             }
+        }
+        else {
+            res.send({
+                message: "Não foi possível excluir o usuário"
+            })
         }
     }
 }

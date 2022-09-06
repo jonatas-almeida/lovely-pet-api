@@ -4,9 +4,9 @@ const jwt_decode = require("jwt-decode");
 module.exports = {
     verifyUserToken(req, res) {
         if (req.headers.authorization) {
-            const userToken = req.headers.authorization.toString().splite(' ')[1]
+            const userToken = req.headers.authorization.toString().split(' ')[1]
 
-            if (jwt.verify(userToken, 'SecReT') === true) {
+            if (jwt.verify(userToken, 'SecRe')) {
                 const userInfo = jwt_decode(userToken);
 
                 return {
